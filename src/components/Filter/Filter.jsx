@@ -1,4 +1,13 @@
-const Filter = ({ onFilter, filterValue }) => {
+import { useSelector, useDispatch } from "react-redux";
+import { getFilter } from "../../redux/phonebook/phonebook-selectors";
+import { filterContact } from "../../redux/phonebook/phonebook-actions";
+
+const Filter = () => {
+  const dispatch = useDispatch();
+  const filterValue = useSelector(getFilter);
+  const onFilterChange = (event) => {
+    dispatch(filterContact(event.target.value));
+  };
   return (
     <>
       <label className="Filter">
@@ -6,7 +15,7 @@ const Filter = ({ onFilter, filterValue }) => {
         <input
           name="filter"
           type="text"
-          onChange={onFilter}
+          onChange={onFilterChange}
           value={filterValue}
         />
       </label>
